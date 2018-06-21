@@ -16,17 +16,18 @@ try:
     api_response = api_instance.login(client_id=client_id, client_secret=client_secret)
     #use client to create new api objects
     client = looker.ApiClient(None, 'Authorization', 'token ' + api_response.access_token)
-    pprint(api_response)
+    #pprint(api_response)
 except ApiException as e:
     print("Exception when calling ApiAuthApi->login: %s\n" % e)
 
-sdk = looker.UserApi(client)
-
-fields = ''
+sdk = looker.LookApi(client)
+look_id = 165
+result_format = 'json'
+limit = 100
 
 try:
-    # Get Current User
-    api_response = sdk.me(fields=fields)
+    #run look
+    api_response = sdk.run_look(look_id, result_format)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling UserApi->me: %s\n" % e)
+    print("Exception when calling ApiAuthApi->run_look: %s\n" % e)
